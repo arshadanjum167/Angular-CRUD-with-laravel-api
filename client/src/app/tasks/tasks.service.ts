@@ -22,9 +22,9 @@ export class TasksService {
       .pipe(catchError(this.handleError('getTasks', [])))
   }
 
-  addTask(task: Task): Observable<Task> {
+  addTask(task: any): Observable<Task> {
     return this.http
-      .post<Task>('api/tasks', task)
+      .post<any>('api/tasks', task)
       .pipe(catchError(this.handleError('addTask', task)))
   }
 

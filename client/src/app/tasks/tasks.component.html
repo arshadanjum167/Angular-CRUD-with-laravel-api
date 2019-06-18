@@ -1,6 +1,10 @@
-<form class="form" (submit)="add(taskTitle.value); taskTitle.value=''">
+<!-- <form class="form" (submit)="add(taskTitle.value); taskTitle.value=''"> -->
+<form #myform="ngForm" (ngSubmit)="onSubmit(myform)">
     <div class="form-group">
-        <input #taskTitle class="form-control" placeholder="Task Name" />
+        <input #taskTitle name="title" ngModel  class="form-control" placeholder="Task Name" />
+    </div>
+    <div class="form-group">
+        <input type="file" name="image"  ngModel (change)="fileProgress($event)"/>
     </div>
     <input type="submit" value="SUBMIT" class="btn btn-success btn-lg btn-block" />
 </form>
@@ -12,6 +16,9 @@
                 <span *ngIf="task!==editTask">{{task.title}}</span>
                 <input *ngIf="task===editTask" [(ngModel)]="task.title" (blur)="update()" (keyup.enter)="update()">
             </a>
+        </td>
+        <td class="text-right">
+            <img src="{{task.image}}" width="50" hieght="50">
         </td>
         <td class="text-right">
             <button class="btn btn-danger" title="delete task" (click)="delete(task)">Delete</button>
